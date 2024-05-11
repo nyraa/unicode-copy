@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Copy char from unicode code or html entity</title>
+        <script language="javascript">
+            function decodeHTMLEntity(entity)
+            {
+                const textarea = document.createElement('textarea');
+                textarea.innerHTML = `&${entity};`;
+                return textarea.textContent;
+            }
+            function copy()
+            {
+                const result = document.getElementById('result');
+                result.select();
+                document.execCommand('copy');
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Copy char from unicode or html entity</h1>
+        <p>Unicode code: <input type="text" id="unicode_code" value="00a7" /></p>
+        <p>HTML entity: &amp;<input type="text" id="html_entity" value="amp" />;</p>
+        <p>Char: <input id="result" type="text" /></p>
+        <button onclick="document.getElementById('result').value = String.fromCharCode(parseInt(document.getElementById('unicode_code').value, 16));">Convert from unicode code</button>
+        <button onclick="document.getElementById('result').value = decodeHTMLEntity(document.getElementById('html_entity').value);">Convert from html entity</button>
+        <button onclick="copy();">Copy</button>
+    </body>
+</html>
